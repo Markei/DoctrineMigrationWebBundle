@@ -1,0 +1,9 @@
+
+{% block document %}
+<h1>{{ name }} for connection: {{ connectionName }}</h1>
+
+<h2>Migrating from version {{ from }} to version {{ to }}</h2>
+<pre>{{ output|join('\r\n')|striptags }}</pre>
+
+<p><a href="{{ path('markei_doctrinemigrationweb_migrate_view', {'connectionName': connectionName}) }}">Back</a></p>
+{% endblock %}

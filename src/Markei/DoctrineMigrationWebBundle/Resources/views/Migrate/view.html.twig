@@ -1,0 +1,31 @@
+{% extends 'MarkeiDoctrineMigrationWebBundle:master:default.html.twig' %}
+
+{% block document %}
+<h1>{{ name }} for connection: {{ connectionName }}</h1>
+
+{% if executedUnavailableMigrations|length > 0 %}
+<h2>WARNING! You have {{ executedUnavailableMigrations|length }} previously executed migrations in the database that are not registered migrations:</h2>
+<ul>
+{% for executedUnavailableMigration in executedUnavailableMigrations %}
+    <li>{{ executedUnavailableMigration }}</li>
+{% endfor %}
+</ul>
+{% endif %}
+
+{% if from == to %}
+<p>No migrations that are not executed yet. Current version {{ from }}, latest available version {{ to }}.</p>
+{% else %}
+<h2>Migrating from version {{ from }} to version {{ to }}</h2>
+{% for version,migration in migrations %}
+<h3>{{ version }}</h3>
+{% for stmt in migration %}
+<pre>{{ stmt }}</pre>
+{% endfor %}
+{% endfor %}
+<p>WARNING! You are about to execute a database migration that could result in schema changes and data lost. Are you sure you wish to continue?</p>
+<form action="{{ path('markei_doctrinemigrationweb_migrate_execute', {'connectionName': connectionName, 'version': to}) }}" method="post">
+    <button type="submit">Continue</button>
+    <a href="{{ path('markei_doctrinemigrationweb_migrate_index') }}">No, stop please</a>
+</form>
+{% endif %}
+{% endblock %}

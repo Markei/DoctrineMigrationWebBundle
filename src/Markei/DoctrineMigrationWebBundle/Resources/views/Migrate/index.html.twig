@@ -1,0 +1,27 @@
+{% extends 'MarkeiDoctrineMigrationWebBundle:master:default.html.twig' %}
+
+{% block document %}
+<h1>{{ name }}</h1>
+<h2>Connections</h2>
+<p>Please select the connection that need to be used for the migration check:</p>
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Driver</th>
+            <th>Host</th>
+            <th>Database</th>
+        </tr>
+    </thead>
+    <tbody>
+{% for name, connection in connections %}
+        <tr>
+            <td><a href="{{ path('markei_doctrinemigrationweb_migrate_view', {'connectionName': name}) }}">{{ name }}</a></td>
+            <td>{{ connection.params.driver }}</td>
+            <td>{{ connection.params.host|default('') }}:{{ connection.params.port|default('') }}</td>
+            <td>{{ connection.params.dbname|default('') }}</td>
+        </tr>
+{% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,16 @@
+{
+    "name": "markei/doctrinemigrationwebbundle",
+    "license": "MIT",
+    "type": "library",
+    "description": "Symfony Bundle to run Doctrine Migrations migrate from the web (if cli is not an option for your webhost)",
+    "autoload": {
+        "psr-4": {
+            "Markei\\DoctrineMigrationWebBundle\\": "src/Markei/DoctrineMigrationWebBundle"
+        }
+    },
+    "require": {
+        "php": ">=5.5.0",
+        "symfony/symfony": "3.0.*",
+        "doctrine/doctrine-migrations-bundle": "^1.1"
+    }
+}
